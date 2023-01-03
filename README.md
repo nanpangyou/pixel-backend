@@ -64,3 +64,25 @@ Rails 提供的工具
 get '/users/:id', to: 'users#show'
 post '/users/', to: 'users#create'
 ```
+
+创建 controller
+
+```shell
+
+ bin/rails g controller users show create
+# 这个命令除了创建 controller 之外，还会创建对应的路由，但是可以在 config/routes.rb 中删除,写自己需要的路由
+
+```
+
+可以使用`curl`命令来测试
+
+```shell
+
+curl -X POST http://localhost:3000/users
+
+curl http://localhost:3000/users/3   
+
+# -v 可以查看详细信息 状态码之类
+curl -v http://localhost:3000/users/3
+
+```
