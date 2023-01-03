@@ -23,6 +23,9 @@ Things you may want to cover:
 
 - ...
 
+
+命令行功能（待查看）： 子字符串查询
+
 初始化命令
 
 ```shell
@@ -86,3 +89,36 @@ curl http://localhost:3000/users/3
 curl -v http://localhost:3000/users/3
 
 ```
+
+
+创建路由的时候可以使用`namespace`的方式来
+```ruby
+  namespace :api do
+    namespace :v1 do
+      #/api/v1
+      resources :validation_codes, only: [:create]
+      resource :session, only: [:create, :destroy]
+      resource :me, only: [:show]
+      resources :items
+      resources :tags
+    end
+  end
+
+# restful对应的controller方法
+
+  # create => post 创建记录
+  # update => patch 表示部分更新
+  # destroy => delete 表示删除
+  # index => get /items?since=2021-01-01&before=2022-01-01 一般指返回多条数据
+  # show => get /items/:id 一般只返回一条数据
+
+```
+
+查看对应的路由
+```shell
+# 创建好后执行
+bin/rails routes
+```
+
+
+可以使用`bin/rails g controller api::v1::validation_codes`来创建`/api/v1`下的路由
