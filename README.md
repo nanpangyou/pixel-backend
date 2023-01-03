@@ -48,3 +48,19 @@ bin/rails s
 ```shell
 docker run -d      --name db-for-pixel      -e POSTGRES_USER=pixel      -e POSTGRES_PASSWORD=123456      -e POSTGRES_DB=pixel_dev      -e PGDATA=/var/lib/postgresql/data/pgdata      -v pixel-data:/var/lib/postgresql/data      --network=network1      postgres:14
 ```
+
+Rails 提供的工具
+
+建模工具：`bin/rails g model user email:string name:string`
+数据库操作工具：`ActiveRecord::Migration`
+同步到数据库：`bin/rails db:migrate`
+反悔命令：`bin/rails  db:rollback step=1`
+
+
+创建路由
+
+```ruby
+# config/routes.rb
+get '/users/:id', to: 'users#show'
+post '/users/', to: 'users#create'
+```
