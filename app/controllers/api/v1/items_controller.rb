@@ -10,10 +10,16 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def index
-    p "132"
+    p "12313"
   end
 
   def show
-    p 4444444444
+    itemId = params[:id]
+    selectedItem = Item.find_by_id(itemId)
+    if selectedItem
+      render json: selectedItem
+    else
+      render json: { msg: "没有此项" }, status: 404
+    end
   end
 end
