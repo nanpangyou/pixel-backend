@@ -131,8 +131,7 @@ bin/rails routes
   def index
     page = params[:page]
     pageSize = params[:size]
-    @records = Item.all
-    @pagy, @xx = pagy(@records, page: page, items: pageSize)
+    @pagy, @xx = pagy(Item, page: page, items: pageSize)
 
     render json: { page: @pagy, records: @xx }
   end
