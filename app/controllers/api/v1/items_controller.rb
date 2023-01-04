@@ -14,9 +14,9 @@ class Api::V1::ItemsController < ApplicationController
   def index
     page = params[:page]
     pageSize = params[:size]
-    @pagy, @xx = pagy(Item, page: page, items: pageSize)
-
-    render json: { page: @pagy, records: @xx }
+    if (@pagy, xx = pagy(Item, page: page, items: pageSize))
+      render json: { page: @pagy, records: xx }
+    end
   end
 
   def show
