@@ -122,3 +122,18 @@ bin/rails routes
 
 
 可以使用`bin/rails g controller api::v1::validation_codes`来创建`/api/v1`下的路由
+
+
+路由使用`pagy`[pagy](https://github.com/ddnexus/pagy),也可以看看`Kaminari`[Kaminari](https://github.com/kaminari/kaminari)
+
+
+```ruby
+  def index
+    page = params[:page]
+    pageSize = params[:size]
+    @records = Item.all
+    @pagy, @xx = pagy(@records, page: page, items: pageSize)
+
+    render json: { page: @pagy, records: @xx }
+  end
+```

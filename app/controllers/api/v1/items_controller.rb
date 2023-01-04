@@ -1,4 +1,6 @@
 class Api::V1::ItemsController < ApplicationController
+  include Pagy::Backend
+
   def create
     item = Item.new amount: 99, note: "测试"
     isSave = item.save
@@ -10,7 +12,12 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def index
-    p "12313"
+    page = params[:page]
+    pageSize = params[:size]
+    @records = Item.all
+    @pagy, @xx = pagy(@records, page: page, items: pageSize)
+
+    render json: { page: @pagy, records: @xx }
   end
 
   def show
