@@ -136,3 +136,73 @@ bin/rails routes
     render json: { page: @pagy, records: @xx }
   end
 ```
+
+
+安装单元测试库`Rspec`[Rspace](https://github.com/rspec/rspec-rails/tree/6-0-maintenance)
+
+```
+# 在gemfile里添加gem
+# Run against this stable release
+group :development, :test do
+  gem 'rspec-rails', '~> 6.0.0'
+end
+
+
+# 使用bundle安装
+# Download and install
+$ bundle install
+
+# Generate boilerplate configuration files
+# (check the comments in each generated file for more information)
+# 初始化
+$ rails generate rspec:install
+```
+
+```shell
+# 针对user生成对于 model 的测试
+rails generate rspec:model user
+```
+```ruby
+# spec/models/user_spec.rb
+
+require "rails_helper"
+
+RSpec.describe User, type: :model do
+  it "有 email" do
+    user = User.new name: "Lewis", email: "yi@163.com"
+    expect(user.email).to eq "yi@163.com"
+  end
+end
+
+```
+
+还要创建测试使用的数据库
+
+在 config/datebase.yml 下增加测试数据库的配置
+```yml
+
+test:
+  <<: *default
+  database: pixel_test
+  username: pixel
+  password: 123456
+  host: db-for-pixel
+
+```
+
+然后使用 rails 创建测试数据库
+```shell
+
+# 需要在执行前添加 RAILS_ENV=test 的环境变量
+# 创建测试数据库
+RAILS_ENV=test bin/rails db:create  
+# 创建表
+RAILS_ENV=test bin/rails db:migrate
+```
+
+然后可以使用以下代码跑所有的测试用例
+```shell
+
+bundle exec rspec
+
+```
