@@ -20,8 +20,8 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    itemId = params[:id]
-    selectedItem = Item.find_by_id(itemId)
+    item_id = params[:id]
+    selectedItem = Item.find_by_id(item_id)
     if selectedItem
       render json: selectedItem
     else

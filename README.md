@@ -206,3 +206,9 @@ RAILS_ENV=test bin/rails db:migrate
 bundle exec rspec
 
 ```
+
+测试请求可以使用 rspec request 
+```shell
+# 生成 spec/requests/items_spec.rb 文件
+rails g rspec:request items
+```
