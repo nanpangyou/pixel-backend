@@ -212,3 +212,6 @@ bundle exec rspec
 # 生成 spec/requests/items_spec.rb 文件
 rails g rspec:request items
 ```
+
+
+rails 自带了可以在命令行里运行简单代码的方法： `rails console`,如果想刷新变量重置环境则输入 `reload!`
