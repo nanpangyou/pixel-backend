@@ -225,3 +225,10 @@ rails 自带了可以在命令行里运行简单代码的方法： `rails consol
 4. 添加运行docker的脚本 `./bin/setup_host.sh`
 5. 给脚本都添加可执行权限 `chmod +x ./bin/*.sh`
 6. 执行打包脚本 `bin/pack_for_host.sh`
+
+7. 创建密钥 `bin/rails credentials:edit` => 会创建一个临时文件，生成一个key(你也可以修改)，关闭后生成两个文件( master.key, credentials.yml.enc)
+8. 如何读取key们
+   1. 打开控制台，输入 `bin/rails console`
+   2. 输入`Rails.application.credentials.key的名字`来获取特定名字的key
+   3. 输入`Rails.application.credentials.config` 来获取所有的key
+   4. 如果想修改，则在执行一遍`bin/rails credentials:edit`
