@@ -234,10 +234,12 @@ rails 自带了可以在命令行里运行简单代码的方法： `rails consol
    4. 如果想修改，则在执行一遍`bin/rails credentials:edit`
 9. 创建生产环境的密钥 `bin/rails credentials:edit --environment production`
 10. 读取生产环境的key们
-    1. 打开控制台，输入`RAILS_ENV=production bin/rails console`
-    2. 输入`Rails.application.credentials.key的名字`来获取特定名字的key
-    3. 输入`Rails.application.credentials.config` 来获取所有的key
-    4. 如果想修改，则在执行一遍`RAILS_ENV=production bin/rails credentials:edit`
+   1. 打开控制台，输入`RAILS_ENV=production bin/rails console`
+   2. 输入`Rails.application.credentials.key的名字`来获取特定名字的key
+   3. 输入`Rails.application.credentials.config` 来获取所有的key
+   4. 如果想修改，则在执行一遍`RAILS_ENV=production bin/rails credentials:edit`
 
 11. 在`setup_host.sh`中`docker run`中添加` -e RAILS_MASTER_KEY=$RAILS_MASTER_KEY `
 12. 在宿主机执行`setup_host.sh`时，`RAILS_MASTER_KEY=在config/credentials/production.key的内容 pixel_backend_deploy/setup_host.sh`
+13. 新建`bin/pack_for_remote.sh`和`bin/setup_remote.sh`
+14. 运行`bin/pack_for_remote.sh`
