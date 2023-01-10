@@ -215,3 +215,13 @@ rails g rspec:request items
 
 
 rails 自带了可以在命令行里运行简单代码的方法： `rails console`,如果想刷新变量重置环境则输入 `reload!`
+
+
+# 部署过程
+
+1. 创建打包脚本 `./bin/pack_for_host.sh`
+2. 修改可执行权限 `chmod -x ./bin/pack_for_host.sh`
+3. 添加Dockerfile `./config/host.Dockerfile`
+4. 添加运行docker的脚本 `./bin/setup_host.sh`
+5. 给脚本都添加可执行权限 `chmod +x ./bin/*.sh`
+6. 执行打包脚本 `bin/pack_for_host.sh`

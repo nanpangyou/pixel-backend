@@ -1,4 +1,5 @@
                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
+                                         GET    /                                                                                                 home#index
                                          GET    /users/:id(.:format)                                                                              users#show
                                    users POST   /users(.:format)                                                                                  users#create
                  api_v1_validation_codes POST   /api/v1/validation_codes(.:format)                                                                api/v1/validation_codes#create
