@@ -87,6 +87,7 @@ test:
 #
 production:
   <<: *default
-  database: pixel_backend_production
-  username: pixel_backend
-  password: <%= ENV["PIXEL_BACKEND_DATABASE_PASSWORD"] %>
+  database: pixel_prodction
+  username: pixel
+  password: <%= ENV["DB_PASSWORD"] %>
+  host: <%= ENV["DB_HOST"] %>
