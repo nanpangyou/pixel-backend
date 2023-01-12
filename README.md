@@ -243,3 +243,6 @@ rails 自带了可以在命令行里运行简单代码的方法： `rails consol
 12. 在宿主机执行`setup_host.sh`时，`RAILS_MASTER_KEY=在config/credentials/production.key的内容 pixel_backend_deploy/setup_host.sh`
 13. 新建`bin/pack_for_remote.sh`和`bin/setup_remote.sh`
 14. 运行`bin/pack_for_remote.sh`
+
+# 添加邮件功能
+[文档](https://guides.rubyonrails.org/action_mailer_basics.html)
