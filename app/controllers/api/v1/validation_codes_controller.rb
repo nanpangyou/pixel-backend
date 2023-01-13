@@ -7,7 +7,7 @@ class Api::V1::ValidationCodesController < ApplicationController
     if validation_code.save
       head 200
     else
-      render json: { msg: validation_code.errors }
+      render json: { msg: validation_code.errors }, status: 422
     end
   end
 end

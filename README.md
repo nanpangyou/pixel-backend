@@ -246,3 +246,11 @@ rails 自带了可以在命令行里运行简单代码的方法： `rails consol
 
 # 添加邮件功能
 [文档](https://guides.rubyonrails.org/action_mailer_basics.html)
+
+# 数据库设计辅助网站
+[dbdiagram](https://dbdiagram.io/)
+
+# TDD
+
+1. 安装`rspec_api_documentation` 用来自动生成api文档（github搜索，安装）  
+2. 按照

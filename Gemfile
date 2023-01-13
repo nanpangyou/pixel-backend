@@ -38,6 +38,8 @@ gem "bootsnap", require: false
 
 # pagy 分页工具
 gem "pagy", "~> 6.0" # omit patch digit
+# 自动生成Api文档的工具
+gem "rspec_api_documentation"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
