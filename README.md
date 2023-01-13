@@ -253,4 +253,5 @@ rails 自带了可以在命令行里运行简单代码的方法： `rails consol
 # TDD
 
 1. 安装`rspec_api_documentation` 用来自动生成api文档（github搜索，安装）  
-2. 按照
+2. 按照`rspec_api_documentation` 文档来完成api文档的自动生成
+
