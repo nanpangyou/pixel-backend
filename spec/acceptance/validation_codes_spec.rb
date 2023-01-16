@@ -13,6 +13,7 @@ resource "验证码" do
     let(:email) { "1@foxmail.com" }
 
     example "测试发送验证码" do
+      expect(UserMailer).to receive(:welcome_email).with(email)
       do_request
       expect(response_body) == " "
       expect(status).to eq 200
