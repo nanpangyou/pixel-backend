@@ -5,7 +5,7 @@ class Api::V1::ValidationCodesController < ApplicationController
                                          kind: "sign_in",
                                          code: code
     if validation_code.save
-      head 200
+      render status: 200
     else
       render json: { msg: validation_code.errors }, status: 422
     end

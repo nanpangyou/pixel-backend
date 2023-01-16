@@ -118,6 +118,8 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Version: HTTP/1.0
+Accept: application/json
+Content-Type: application/json
 Host: example.org
 Cookie: </pre>
 
@@ -136,15 +138,58 @@ X-Download-Options: noopen
 X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
 Content-Type: application/json; charset=utf-8
+Vary: Accept
 ETag: W/&quot;d27ef10e91db4955bdf48850026f29f6&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 0b81eb33-fb18-4f3b-b6d7-02d46e29a8c8
-X-Runtime: 0.030482
+X-Request-Id: 5078a8f9-7ecf-461d-b059-9e8bea8e4276
+X-Runtime: 0.029072
 Content-Length: 383</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">[binary data]</pre>
+              <pre class="response body">{
+  &quot;page&quot;: {
+    &quot;overflow&quot;: false,
+    &quot;vars&quot;: {
+      &quot;page&quot;: 1,
+      &quot;items&quot;: 10,
+      &quot;outset&quot;: 0,
+      &quot;size&quot;: [
+        1,
+        4,
+        4,
+        1
+      ],
+      &quot;page_param&quot;: &quot;page&quot;,
+      &quot;params&quot;: {
+      },
+      &quot;fragment&quot;: &quot;&quot;,
+      &quot;link_extra&quot;: &quot;&quot;,
+      &quot;i18n_key&quot;: &quot;pagy.item_name&quot;,
+      &quot;cycle&quot;: false,
+      &quot;request_path&quot;: &quot;&quot;,
+      &quot;overflow&quot;: &quot;empty_page&quot;,
+      &quot;count&quot;: 0
+    },
+    &quot;count&quot;: 0,
+    &quot;page&quot;: 1,
+    &quot;outset&quot;: 0,
+    &quot;items&quot;: 10,
+    &quot;last&quot;: 1,
+    &quot;pages&quot;: 1,
+    &quot;offset&quot;: 0,
+    &quot;params&quot;: {
+    },
+    &quot;from&quot;: 0,
+    &quot;to&quot;: 0,
+    &quot;in&quot;: 0,
+    &quot;prev&quot;: null,
+    &quot;next&quot;: null
+  },
+  &quot;records&quot;: [
+
+  ]
+}</pre>
       </div>
     </div>
   </body>

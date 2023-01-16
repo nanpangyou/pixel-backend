@@ -254,4 +254,4 @@ rails 自带了可以在命令行里运行简单代码的方法： `rails consol
 
 1. 安装`rspec_api_documentation` 用来自动生成api文档（github搜索，安装）  
 2. 按照`rspec_api_documentation` 文档来完成api文档的自动生成
-
+3. 配置生成的config 使得入参反参均为`json`
