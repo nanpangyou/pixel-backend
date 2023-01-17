@@ -5,7 +5,7 @@ class ValidationCode < ApplicationRecord
   # email参数为必填
   validates :email, presence: true
 
-  after_initialize :generate_code
+  before_create :generate_code
   after_create :send_email
 
   def generate_code
