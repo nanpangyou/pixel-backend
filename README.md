@@ -123,6 +123,8 @@ bin/rails routes
 
 可以使用`bin/rails g controller api::v1::validation_codes`来创建`/api/v1`下的路由
 
+或者`bin/rails g controller api/v1/mes_controller`来创建`/api/v1`下的路由
+
 
 路由使用`pagy`[pagy](https://github.com/ddnexus/pagy),也可以看看`Kaminari`[Kaminari](https://github.com/kaminari/kaminari)
 
