@@ -260,3 +260,10 @@ rails 自带了可以在命令行里运行简单代码的方法： `rails consol
 
 
 可以在`bin/rails c`控制台中使用`ValidationCode.destroy_all`可以清空`validation_codes`表中的数据
+
+
+
+## 中间件
+
+`bin/rails middleware` 列出所有的中间件
+其他添加删除等见[链接](https://guides.rubyonrails.org/rails_on_rack.html)
