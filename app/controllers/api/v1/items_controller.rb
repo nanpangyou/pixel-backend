@@ -2,7 +2,7 @@ class Api::V1::ItemsController < ApplicationController
   include Pagy::Backend
 
   def create
-    item = Item.new amount: 99, note: "测试"
+    item = Item.new
     isSave = item.save
     if isSave
       render json: item
@@ -14,7 +14,8 @@ class Api::V1::ItemsController < ApplicationController
   def index
     page = params[:page]
     pageSize = params[:size]
-    if (@pagy, xx = pagy(Item, page: page, items: pageSize))
+    selectItem = Item.where(created_at: params[:created_after]..params[:created_before])
+    if (@pagy, xx = pagy(selectItem, page: page, items: pageSize))
       render json: { page: @pagy, records: xx }
     end
   end
