@@ -11,8 +11,6 @@ class Api::V1::SessionsController < ApplicationController
     end
     user = User.find_by(email: params[:email])
     return render status: 404, json: { error: "用户不存在" } if user.nil?
-    payload = { userId: user.id }
-    token = JWT.encode payload, Rails.application.credentials.hmac_secret, "HS256"
-    render status: :ok, json: { token: token }
+    render status: :ok, json: { token: user.generate_jwt }
   end
 end

@@ -3,6 +3,8 @@ require "rspec_api_documentation/dsl"
 
 resource "items查询" do
   get "/api/v1/items" do
+    #认证方式 basic => 以 Bearer 开头的 token auth => 变量，存放jwt
+    authentication :basic, :auth
     # 入参描述
     parameter :page, "页码", required: false
     parameter :size, "每页数量", required: false
@@ -22,9 +24,11 @@ resource "items查询" do
 
     let(:created_after) { "2018-01-02" }
     let(:created_before) { "2019-01-02" }
+    let(:current_user) { User.create email: "1@qq.com" }
+    let(:auth) { "Bearer #{current_user.generate_jwt}" }
 
     example "获取账目" do
-      11.times { Item.create(amount: 99, note: "测试", created_at: "2018-10-22") }
+      11.times { Item.create(amount: 99, note: "测试", created_at: "2018-10-22", user_id: current_user.id) }
       do_request
       expect(status).to eq 200
       json = JSON.parse response_body

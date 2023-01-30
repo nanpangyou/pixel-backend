@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def show
-    p "12312+++" + params["id"]
     user = User.find_by_id params["id"]
     if user
       render json: user
