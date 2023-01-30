@@ -9,7 +9,7 @@ resource "验证码" do
 
     # This is automatic way
     # It's possible because we extract parameters definitions from the values
-    parameter :email, with_example: true
+    parameter :email, "邮箱", required: true
     let(:email) { "1@foxmail.com" }
 
     example "测试发送验证码" do

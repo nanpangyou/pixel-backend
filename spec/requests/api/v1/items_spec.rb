@@ -46,7 +46,7 @@ RSpec.describe "Items", type: :request do
   end
 
   describe "查询Items" do
-    it "分页测试(包含查询条件,边界条件)" do
+    it "分页测试(包含查询条件,边界条件,部分条件)" do
       Item.create(amount: 99, note: "测试", created_at: "2019-01-02")
       Item.create(amount: 99, note: "测试", created_at: "2019-01-01")
       Item.create(amount: 99, note: "测试", created_at: "2018-01-02")
@@ -55,11 +55,15 @@ RSpec.describe "Items", type: :request do
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)["records"]
       expect(json.size).to eq(2)
+      get "/api/v1/items?created_after=2018-07-01"
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)["records"]
+      expect(json.size).to eq(3)
     end
   end
 
   describe "创建Items" do
-    it "can create item" do
+    it "根据id搜索" do
       expect {
         3.times { (Item.create amount: 99, note: "测试") }
       }.to change { Item.count }.by(+3)
