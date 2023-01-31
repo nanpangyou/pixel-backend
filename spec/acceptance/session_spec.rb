@@ -12,7 +12,7 @@ resource "登录" do
     let(:email) { "1@foxmail.com" }
     let(:code) { "123456" }
 
-    example "测试发送验证码" do
+    example "登录获取jwt" do
       do_request
       expect(status).to eq 200
       json = JSON.parse(response_body)
