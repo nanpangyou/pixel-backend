@@ -9,8 +9,12 @@ class Api::V1::SessionsController < ApplicationController
       can_sign_in = ValidationCode.exists?(email: params[:email], code: params[:code], used_at: nil)
       return render status: 401, json: { error: "验证码错误" } unless can_sign_in
     end
-    user = User.find_by(email: params[:email])
-    return render status: 404, json: { error: "用户不存在" } if user.nil?
+    # 下面有更好的方法
+    # user = User.find_by(email: params[:email])
+    # user = User.create email: params[:email] if user.nil?
+
+    # 根据email查找user，如果找不到就创建user
+    user = User.find_or_create_by(email: params[:email])
     render status: :ok, json: { token: user.generate_jwt }
   end
 end

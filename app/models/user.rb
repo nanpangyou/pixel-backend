@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   def generate_jwt
-    payload = { userId: self.id }
+    payload = { userId: self.id, exp: (Time.now + 2.hours).to_i }
     token = JWT.encode payload, Rails.application.credentials.hmac_secret, "HS256"
   end
 
