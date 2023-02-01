@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>items查询 API</title>
+    <title>Tags查询 API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>items查询 API</h1>
+      <h1>Tags查询 API</h1>
 
       <div class="article">
         <h2>获取账目</h2>
-        <h3>GET /api/v1/items</h3>
+        <h3>GET /api/v1/tags</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -137,22 +137,6 @@ table th, table td {
                   <span class="description">每页数量</span>
                 </td>
               </tr>
-              <tr>
-                <td>
-                    <span class="name">created_after</span>
-                </td>
-                <td>
-                  <span class="description">创建起始时间</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">created_before</span>
-                </td>
-                <td>
-                  <span class="description">创建终止时间</span>
-                </td>
-              </tr>
             </tbody>
           </table>
 
@@ -175,10 +159,34 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">records[amount]</span>
+                    <span class="name">records[user_id]</span>
                 </td>
                 <td>
-                  <span class="description">金额</span>
+                  <span class="description">所属用户id</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">records[name]</span>
+                </td>
+                <td>
+                  <span class="description">名称</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">records[sign]</span>
+                </td>
+                <td>
+                  <span class="description">符号</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">records[delete_at]</span>
+                </td>
+                <td>
+                  <span class="description">删除时间</span>
                 </td>
               </tr>
               <tr>
@@ -220,18 +228,15 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Version: HTTP/1.0
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIxMywiZXhwIjoxNjc1MjQxNzQ0fQ.2RoVfrk3DFePDot1BK0PL71zc0x56OnqfkRannBnN10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIxNSwiZXhwIjoxNjc1MjQxNzQ0fQ.GXbl7YTEp1ZhK4Bvc4bAJLBWf16yZNxaEDXzxWUmFr4
 Accept: application/json
 Content-Type: application/json
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/v1/items?created_after=2018-01-02&amp;created_before=2019-01-02</pre>
+          <pre class="request route highlight">GET /api/v1/tags</pre>
 
-            <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">created_after: 2018-01-02
-created_before: 2019-01-02</pre>
 
 
 
@@ -245,11 +250,11 @@ X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
 Content-Type: application/json; charset=utf-8
 Vary: Accept
-ETag: W/&quot;069b62ead8ccb5d950fdda30bab03e33&quot;
+ETag: W/&quot;035a055b3b5ea65039340bbae676f391&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: f25cda61-c0ee-4956-b988-08f8ff2cf977
-X-Runtime: 0.025011
-Content-Length: 2033</pre>
+X-Request-Id: b4f9ab15-da7e-491e-b475-b07a15d5cc4c
+X-Runtime: 0.005603
+Content-Length: 1943</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
@@ -294,104 +299,94 @@ Content-Length: 2033</pre>
   },
   &quot;records&quot;: [
     {
-      &quot;id&quot;: 870,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.713Z&quot;
+      &quot;id&quot;: 189,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 0&quot;,
+      &quot;sign&quot;: &quot;测试 0&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.843Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.843Z&quot;
     },
     {
-      &quot;id&quot;: 871,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.715Z&quot;
+      &quot;id&quot;: 190,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 1&quot;,
+      &quot;sign&quot;: &quot;测试 1&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.846Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.846Z&quot;
     },
     {
-      &quot;id&quot;: 872,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.717Z&quot;
+      &quot;id&quot;: 191,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 2&quot;,
+      &quot;sign&quot;: &quot;测试 2&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.849Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.849Z&quot;
     },
     {
-      &quot;id&quot;: 873,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.719Z&quot;
+      &quot;id&quot;: 192,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 3&quot;,
+      &quot;sign&quot;: &quot;测试 3&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.852Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.852Z&quot;
     },
     {
-      &quot;id&quot;: 874,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.721Z&quot;
+      &quot;id&quot;: 193,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 4&quot;,
+      &quot;sign&quot;: &quot;测试 4&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.855Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.855Z&quot;
     },
     {
-      &quot;id&quot;: 875,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.723Z&quot;
+      &quot;id&quot;: 194,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 5&quot;,
+      &quot;sign&quot;: &quot;测试 5&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.858Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.858Z&quot;
     },
     {
-      &quot;id&quot;: 876,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.724Z&quot;
+      &quot;id&quot;: 195,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 6&quot;,
+      &quot;sign&quot;: &quot;测试 6&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.860Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.860Z&quot;
     },
     {
-      &quot;id&quot;: 877,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.727Z&quot;
+      &quot;id&quot;: 196,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 7&quot;,
+      &quot;sign&quot;: &quot;测试 7&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.862Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.862Z&quot;
     },
     {
-      &quot;id&quot;: 878,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.728Z&quot;
+      &quot;id&quot;: 197,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 8&quot;,
+      &quot;sign&quot;: &quot;测试 8&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.865Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.865Z&quot;
     },
     {
-      &quot;id&quot;: 879,
-      &quot;user_id&quot;: 213,
-      &quot;amount&quot;: 99,
-      &quot;note&quot;: &quot;测试&quot;,
-      &quot;tags_id&quot;: null,
-      &quot;happen_at&quot;: null,
-      &quot;created_at&quot;: &quot;2018-10-22T00:00:00.000Z&quot;,
-      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.730Z&quot;
+      &quot;id&quot;: 198,
+      &quot;user_id&quot;: 215,
+      &quot;name&quot;: &quot;tags 9&quot;,
+      &quot;sign&quot;: &quot;测试 9&quot;,
+      &quot;delete_at&quot;: null,
+      &quot;created_at&quot;: &quot;2023-02-01T06:55:44.869Z&quot;,
+      &quot;updated_at&quot;: &quot;2023-02-01T06:55:44.869Z&quot;
     }
   ]
 }</pre>
