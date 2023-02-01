@@ -83,4 +83,12 @@ resource "Tags查询" do
       expect(json["sign"]).to eq "y"
     end
   end
+
+  delete "/api/v1/tags/:id" do
+    example "删除标签" do
+      original_tag = Tag.create(name: "a", sign: "b", user_id: current_user.id)
+      do_request id: original_tag.id
+      expect(status).to eq 200
+    end
+  end
 end
