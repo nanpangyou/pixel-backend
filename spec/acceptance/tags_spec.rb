@@ -36,8 +36,8 @@ resource "Tags查询" do
 
   post "/api/v1/tags" do
     # 入参描述
-    parameter :name, "标签名称", required: false
-    parameter :sign, "标签符号", required: false
+    parameter :name, "标签名称", required: true
+    parameter :sign, "标签符号", required: true
     # 返参描述
     response_field :id, "id"
     response_field :user_id, "所属用户id"
@@ -51,6 +51,32 @@ resource "Tags查询" do
 
     example "创建标签" do
       do_request
+      expect(status).to eq 200
+      json = JSON.parse response_body
+      expect(json["name"]).to eq "x"
+      expect(json["sign"]).to eq "y"
+    end
+  end
+
+  patch "/api/v1/tags/:id" do
+
+    # 入参描述
+    parameter :name, "标签名称"
+    parameter :sign, "标签符号"
+    # 返参描述
+    response_field :id, "id"
+    response_field :user_id, "所属用户id"
+    response_field :name, "名称"
+    response_field :sign, "符号"
+    response_field :delete_at, "删除时间"
+
+    # 设置参数
+    let(:name) { "x" }
+    let(:sign) { "y" }
+
+    example "更新标签" do
+      original_tag = Tag.create(name: "a", sign: "b", user_id: current_user.id)
+      do_request id: original_tag.id
       expect(status).to eq 200
       json = JSON.parse response_body
       expect(json["name"]).to eq "x"

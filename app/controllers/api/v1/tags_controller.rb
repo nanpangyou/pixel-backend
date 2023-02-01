@@ -24,4 +24,19 @@ class Api::V1::TagsController < ApplicationController
       return render json: { msg: newTag.errors }, status: :unprocessable_entity
     end
   end
+
+  def update
+    return render json: { msg: "请登录" }, status: :authentication if request.env["current_user_id"].nil?
+    selectTag = Tag.where(user_id: request.env["current_user_id"]).find_by_id(params[:id])
+    if selectTag
+      selectTag.update params.permit(:sign, :name)
+    else
+      return render json: { msg: "没有此项" }, status: 404
+    end
+    if selectTag.errors.empty?
+      return render json: selectTag, status: :ok
+    else
+      return render json: { msg: selectTag.errors }, status: :unprocessable_entity
+    end
+  end
 end
