@@ -25,12 +25,30 @@ resource "Tags查询" do
       response_field :count, "总数量"
     end
 
-    example "获取标签" do
+    example "获取标签列表" do
       11.times do |i| Tag.create(name: "tags #{i}", sign: "测试 #{i}", user_id: current_user.id) end
       do_request
       expect(status).to eq 200
       json = JSON.parse response_body
       expect(json["records"].size).to eq 10
+    end
+  end
+  get "/api/v1/tags/:id" do
+    # 返参描述
+    response_field :id, "id"
+    response_field :user_id, "所属用户id"
+    response_field :name, "名称"
+    response_field :sign, "符号"
+    response_field :delete_at, "删除时间"
+
+    let(:tags) { Tag.create(name: "xw", sign: "ff", user_id: current_user.id) }
+    let(:id) { tags.id }
+    example "获取单个标签" do
+      do_request
+      expect(status).to eq 200
+      json = JSON.parse response_body
+      expect(json["name"]).to eq "xw"
+      expect(json["sign"]).to eq "ff"
     end
   end
 

@@ -2,6 +2,7 @@ class Api::V1::TagsController < ApplicationController
   include Pagy::Backend
 
   def index
+    # 列表
     return render json: { msg: "请登录" }, status: :authentication if request.env["current_user_id"].nil?
     page = params[:page]
     pageSize = params[:size]
@@ -12,6 +13,18 @@ class Api::V1::TagsController < ApplicationController
       render json: { page: @pagy, records: xx }
     else
       render json: { msg: selectTag.errors }, status: 404
+    end
+  end
+
+  def show
+    # 单个
+    return render json: { msg: "请登录" }, status: :authentication if request.env["current_user_id"].nil?
+    selected_tag = Tag.where(delete_at: nil).find_by_id(params[:id])
+    return head :forbidden if request.env["current_user_id"] != selected_tag.user_id
+    if selected_tag
+      render json: selected_tag
+    else
+      render json: { msg: "没有此项" }, status: 404
     end
   end
 

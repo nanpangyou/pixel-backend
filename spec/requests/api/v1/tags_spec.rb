@@ -40,12 +40,23 @@ RSpec.describe "Api::V1::Tags", type: :request do
       expect(json.size).to eq(4)
     end
 
-    xit "登录后获取不属于自己的标签" do
+    it "获取单个tag" do
+      user = User.create email: "1@qq.com"
+      new_tag = Tag.create name: "tag", sign: "xxx", user_id: user.id
+      get "/api/v1/tags/#{new_tag.id}", headers: user.generate_auth_hearder
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json["name"]).to eq("tag")
+      expect(json["sign"]).to eq("xxx")
+    end
+
+    it "登录后获取不属于自己的标签" do
       user = User.create email: "1@qq.com"
       another_user = User.create email: "2@qq.com"
-      11.times do Tag.create name: "x", sign: "y", user_id: user.id end
-      get "/api/v1/tags", headers: another_user.generate_auth_hearder
-      expect(response).to have_http_status(200)
+      user_tag = Tag.create name: "xxx", sign: "yyy", user_id: user.id
+      another_user_tag = Tag.create name: "aaa", sign: "bbb", user_id: another_user.id
+      get "/api/v1/tags/#{user_tag.id}", headers: another_user.generate_auth_hearder
+      expect(response).to have_http_status(403)
     end
   end
   describe "创建标签" do
