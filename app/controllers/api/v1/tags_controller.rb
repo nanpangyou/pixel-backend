@@ -5,7 +5,7 @@ class Api::V1::TagsController < ApplicationController
     return render json: { msg: "请登录" }, status: :authentication if request.env["current_user_id"].nil?
     page = params[:page]
     pageSize = params[:size]
-    selectTag = Tag.where(user_id: request.env["current_user_id"])
+    selectTag = Tag.where(user_id: request.env["current_user_id"]).where(delete_at: nil)
     #       .where(created_at: params[:created_after]..params[:created_before])
     if selectTag
       (@pagy, xx = pagy(selectTag, page: page, items: pageSize))

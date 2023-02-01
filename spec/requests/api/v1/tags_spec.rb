@@ -30,6 +30,16 @@ RSpec.describe "Api::V1::Tags", type: :request do
       expect(json.size).to eq(0)
     end
 
+    it "获取不到已经删除的标签" do
+      user = User.create email: "1@qq.com"
+      5.times do |i| Tag.create name: "tag#{i}", sign: "xxx", user_id: user.id end
+      delete "/api/v1/tags/#{Tag.last.id}", headers: user.generate_auth_hearder
+      get "/api/v1/tags", headers: user.generate_auth_hearder
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)["records"]
+      expect(json.size).to eq(4)
+    end
+
     xit "登录后获取不属于自己的标签" do
       user = User.create email: "1@qq.com"
       another_user = User.create email: "2@qq.com"
