@@ -267,3 +267,16 @@ rails 自带了可以在命令行里运行简单代码的方法： `rails consol
 
 `bin/rails middleware` 列出所有的中间件
 其他添加删除等见[链接](https://guides.rubyonrails.org/rails_on_rack.html)
+
+
+
+# 快速实现Api接口
+
+get /api/v1/tags
+
+1. 创建`model`
+2. 运行`db:migrate`
+3. 创建`controller`
+4. 写测试
+5. 写代码
+6. 写文档
