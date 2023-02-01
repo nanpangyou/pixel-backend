@@ -96,7 +96,7 @@ RSpec.describe "Api::V1::Tags", type: :request do
       expect(json["sign"]).to eq "y"
       expect(json["name"]).to eq "b"
     end
-    it "登录后修改标签" do
+    it "登录后修改别人的标签" do
       user = User.create email: "1@qq.com"
       newTag = Tag.create! sign: "x", name: "a", user_id: user.id
       patch "/api/v1/tags/#{newTag.id}", params: { sign: "y" }, headers: user.generate_auth_hearder
@@ -112,6 +112,26 @@ RSpec.describe "Api::V1::Tags", type: :request do
       another_user_tag = Tag.create! sign: "x", name: "a", user_id: another_user.id
       patch "/api/v1/tags/#{another_user_tag.id}", params: { sign: "y", name: "b" }, headers: user.generate_auth_hearder
       expect(response).to have_http_status(404)
+    end
+  end
+  describe "删除标签" do
+    it "未登录删除标签" do
+      newTag = Tag.create sign: "x", name: "a"
+      delete "/api/v1/tags/#{newTag.id}"
+      expect(response).to have_http_status(401)
+    end
+    it "登录后删除标签" do
+      user = User.create email: "1@qq.com"
+      new_tag = Tag.create! sign: "x", name: "a", user_id: user.id
+      delete "/api/v1/tags/#{new_tag.id}", headers: user.generate_auth_hearder
+      expect(response).to have_http_status(200)
+    end
+    it "登录后删除别人的标签" do
+      user = User.create email: "1@qq.com"
+      another_user = User.create email: "2@qq.com"
+      new_tag = Tag.create! sign: "x", name: "a", user_id: user.id
+      delete "/api/v1/tags/#{new_tag.id}", headers: another_user.generate_auth_hearder
+      expect(response).to have_http_status(403)
     end
   end
 end

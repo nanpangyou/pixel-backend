@@ -39,4 +39,20 @@ class Api::V1::TagsController < ApplicationController
       return render json: { msg: selectTag.errors }, status: :unprocessable_entity
     end
   end
+
+  def destroy
+    return render json: { msg: "请登录" }, status: :authentication if request.env["current_user_id"].nil?
+    ready_to_delete_tag = Tag.where(user_id: request.env["current_user_id"]).find_by_id(params[:id])
+    if ready_to_delete_tag
+      # 删除Tag
+      ready_to_delete_tag.delete_at = Time.now
+    else
+      return head :forbidden
+    end
+    if ready_to_delete_tag.save
+      head :ok
+    else
+      return render json: { msg: ready_to_delete_tag.errors }, status: :unprocessable_entity
+    end
+  end
 end
