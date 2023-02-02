@@ -280,3 +280,11 @@ get /api/v1/tags
 4. 写测试
 5. 写代码
 6. 写文档
+
+
+# 如何修改数据库（对已经建好的表添加字段）
+
+```shell
+bin/rails g migration AddKindToItem kind:integer
+```
+会生成一个rb文件，里面有一个`change`方法，里面写着要添加的字段，然后运行`bin/rake db:migrate`即可
