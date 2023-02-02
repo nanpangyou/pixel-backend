@@ -10,6 +10,10 @@ RSpec.describe "Items", type: :request do
   end
 
   describe "创建Items" do
+    it "未登录创建items" do
+      post "/api/v1/items", params: { amount: 113 }
+      expect(response).to have_http_status(401)
+    end
     it "通过post方法创建item测试" do
       user1 = User.create email: "1@qq.com"
       expect {
