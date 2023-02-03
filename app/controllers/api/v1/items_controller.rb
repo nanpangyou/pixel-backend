@@ -3,7 +3,9 @@ class Api::V1::ItemsController < ApplicationController
 
   def create
     return render status: 401, json: { error: "用户未登录" } if request.env["current_user_id"].nil?
-    item = Item.new params.permit(:amount, :note, :happen_at, "tags_id": [])
+    permitted_params = params.permit(:amount, :kind, :note, :happen_at, "tags_id": [])
+    permitted_params[:kind] = permitted_params[:kind].to_i
+    item = Item.new permitted_params
     item.user_id = request.env["current_user_id"]
     isSave = item.save
     if isSave

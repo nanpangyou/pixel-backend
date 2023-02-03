@@ -27,6 +27,22 @@ RSpec.describe "Items", type: :request do
       expect(json["msg"]["amount"]).to eq ["can't be blank"]
     end
 
+    xit "通过post方法创建item测试(非法kind)" do
+      user1 = User.create email: "1@qq.com"
+      post "/api/v1/items", params: { amount: 113, happen_at: "2019-01-02", kind: 4 }, headers: user1.generate_auth_hearder
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json["kind"]).to eq "expense"
+    end
+
+    it "通过post方法创建item测试(kind=0)" do
+      user1 = User.create email: "1@qq.com"
+      post "/api/v1/items", params: { amount: 113, happen_at: "2019-01-02", kind: 0 }, headers: user1.generate_auth_hearder
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json["kind"]).to eq "income"
+    end
+
     it "通过post方法创建item测试,校验tags_id" do
       user1 = User.create email: "1@qq.com"
       new_tag = Tag.create name: "xx", sign: "yy", user_id: user1.id

@@ -42,6 +42,7 @@ resource "items查询" do
     parameter :amount, "金额", required: true
     parameter :happen_at, "金额产生日期", required: true
     parameter :tags_id, "标签id列表", required: false
+    parameter :kind, "类型: 1=> expense, 0=>income", required: false
     # 返参描述
     response_field :id, "id"
     response_field :amount, "金额"
@@ -54,6 +55,7 @@ resource "items查询" do
     let(:item1) { Tag.create name: "xx", sign: "yy", user_id: current_user.id }
     let(:item2) { Tag.create name: "xx", sign: "yy", user_id: current_user.id }
     let(:amount) { 90 }
+    let(:kind) { 0 }
     let(:happen_at) { "2019-01-02" }
     let(:tags_id) { [item1.id, item2.id] }
 
@@ -64,6 +66,7 @@ resource "items查询" do
       expect(json["amount"]).to eq 90
       expect(json["happen_at"]).to eq "2019-01-02T00:00:00.000Z"
       expect(json["user_id"]).to eq current_user.id
+      expect(json["kind"]).to eq "income"
     end
   end
 end
