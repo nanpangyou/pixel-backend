@@ -145,6 +145,14 @@ table th, table td {
                   <span class="description">标签id列表</span>
                 </td>
               </tr>
+              <tr>
+                <td>
+                    <span class="name">kind</span>
+                </td>
+                <td>
+                  <span class="description">类型: 1=&gt; expense, 0=&gt;income</span>
+                </td>
+              </tr>
             </tbody>
           </table>
 
@@ -220,7 +228,7 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Version: HTTP/1.0
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEzOTYsImV4cCI6MTY3NTM5NzYzOX0.rAgKvTZWf0bRhPEip85Bg4w5kyqj9_huXhIrjgWeCyU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIzMjEsImV4cCI6MTY3NTQwMTEzMn0.4mg7oQ19YIQLQ9sm3vWxur217fsp1QuR4WAcW_wDt84
 Accept: application/json
 Content-Type: application/json
 Host: example.org
@@ -231,7 +239,7 @@ Cookie: </pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">{"amount":90,"happen_at":"2019-01-02","tags_id":[1625,1626]}</pre>
+            <pre class="request body">{"amount":90,"happen_at":"2019-01-02","tags_id":[2802,2803],"kind":0}</pre>
 
 
             <h3>Response</h3>
@@ -244,27 +252,27 @@ X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
 Content-Type: application/json; charset=utf-8
 Vary: Accept
-ETag: W/&quot;acfdd9145145e32ca9379e202983c847&quot;
+ETag: W/&quot;a3185ca79c3ec9fa0d42db6bf4b796ac&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 213ef643-fd83-4446-aa01-f08421e6db2e
-X-Runtime: 0.004918
-Content-Length: 208</pre>
+X-Request-Id: ad6a7abf-4e86-459a-ad92-4acae6ef379e
+X-Runtime: 0.006093
+Content-Length: 207</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
               <pre class="response body">{
-  &quot;id&quot;: 1508,
-  &quot;user_id&quot;: 1396,
+  &quot;id&quot;: 2802,
+  &quot;user_id&quot;: 2321,
   &quot;amount&quot;: 90,
   &quot;note&quot;: null,
   &quot;tags_id&quot;: [
-    1625,
-    1626
+    2802,
+    2803
   ],
   &quot;happen_at&quot;: &quot;2019-01-02T00:00:00.000Z&quot;,
-  &quot;created_at&quot;: &quot;2023-02-03T02:13:59.173Z&quot;,
-  &quot;updated_at&quot;: &quot;2023-02-03T02:13:59.173Z&quot;,
-  &quot;kind&quot;: &quot;expense&quot;
+  &quot;created_at&quot;: &quot;2023-02-03T03:12:12.695Z&quot;,
+  &quot;updated_at&quot;: &quot;2023-02-03T03:12:12.695Z&quot;,
+  &quot;kind&quot;: &quot;income&quot;
 }</pre>
       </div>
     </div>
