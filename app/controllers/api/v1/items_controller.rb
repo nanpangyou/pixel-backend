@@ -41,8 +41,8 @@ class Api::V1::ItemsController < ApplicationController
     return render status: 401, json: { error: "用户未登录" } if request.env["current_user_id"].nil?
     selectItem = Item
       .where(user_id: request.env["current_user_id"])
-      .where(created_at: params[:created_after]..params[:created_before])
-      .where(kind: params[:kind])
+      .where(happen_at: params[:happened_after]..params[:happened_before])
+      .where(kind: params[:kind] || 1)
     hash = Hash.new
     if (params[:group_by] == "tags_id")
       selectItem.each do |item|
@@ -63,10 +63,11 @@ class Api::V1::ItemsController < ApplicationController
     end
     groups = hash
       .map { |key, value| { "#{params[:group_by]}": key, amount: value } }
-    if (params["#{params[:group_by]}"] == "happen_at")
+
+    if (params[:group_by] == "happen_at")
       groups.sort! { |a, b| a[:happen_at] <=> b[:happen_at] }
-    elsif (params["#{params[:group_by]}"] == "tags_id")
-      groups.sort! { |a, b| a[:amount] <=> b[:amount] }
+    elsif (params[:group_by] == "tags_id")
+      groups.sort! { |a, b| b[:amount] <=> a[:amount] }
     end
     return render json: {
                     groups: groups,

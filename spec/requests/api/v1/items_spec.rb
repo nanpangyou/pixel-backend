@@ -169,7 +169,7 @@ RSpec.describe "Items", type: :request do
 
       get "/api/v1/items/summary",
           params: {
-            start_date: "2019-01-16", end_date: "2019-12-18", group_by: "happen_at", kind: 1,
+            happened_after: "2019-01-16", happened_before: "2019-12-18", group_by: "happen_at", kind: 1,
           }, headers: user1.generate_auth_hearder
 
       # 返参格式
@@ -193,24 +193,24 @@ RSpec.describe "Items", type: :request do
       Item.create(amount: 100, tags_id: [tag1.id, tag2.id], note: "测试", happen_at: "2019-06-16T00:00:00+08:00", user_id: user1.id, kind: 1)
       Item.create(amount: 200, tags_id: [tag2.id, tag3.id], note: "测试", happen_at: "2019-06-16T00:00:00+08:00", user_id: user1.id, kind: 1)
       Item.create(amount: 300, tags_id: [tag1.id, tag3.id], note: "测试", happen_at: "2019-06-16T00:00:00+08:00", user_id: user1.id, kind: 0)
-      Item.create(amount: 100, tags_id: [tag3.id], note: "测试", happen_at: "2019-06-17T00:00:00+08:00", user_id: user1.id, kind: 1)
+      Item.create(amount: 300, tags_id: [tag3.id], note: "测试", happen_at: "2019-06-17T00:00:00+08:00", user_id: user1.id, kind: 1)
 
       get "/api/v1/items/summary",
           params: {
-            start_date: "2019-01-16", end_date: "2019-12-18", group_by: "tags_id", kind: 1,
+            happened_after: "2019-01-16", happened_before: "2019-12-18", group_by: "tags_id", kind: 1,
           }, headers: user1.generate_auth_hearder
 
       # 返参格式
       # { groups: [{ tag_id: "xxx", amount: 11 }, { tag_id: "yy", amount: 22 }], total: 33 }
       expect(response).to have_http_status(200)
       responseJson = JSON.parse(response.body)
-      expect(responseJson["groups"][0]["tags_id"]).to eq(tag1.id)
-      expect(responseJson["groups"][0]["amount"]).to eq(100)
+      expect(responseJson["groups"][0]["tags_id"]).to eq(tag3.id)
+      expect(responseJson["groups"][0]["amount"]).to eq(500)
       expect(responseJson["groups"][1]["tags_id"]).to eq(tag2.id)
       expect(responseJson["groups"][1]["amount"]).to eq(300)
-      expect(responseJson["groups"][2]["tags_id"]).to eq(tag3.id)
-      expect(responseJson["groups"][2]["amount"]).to eq(300)
-      expect(responseJson["total"]).to eq(400)
+      expect(responseJson["groups"][2]["tags_id"]).to eq(tag1.id)
+      expect(responseJson["groups"][2]["amount"]).to eq(100)
+      expect(responseJson["total"]).to eq(600)
     end
   end
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tags查询 API</title>
+    <title>items查询 API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Tags查询 API</h1>
+      <h1>items查询 API</h1>
 
       <div class="article">
-        <h2>更新标签</h2>
-        <h3>PATCH /api/v1/tags/:id</h3>
+        <h2>统计信息（按happen_at分组）</h2>
+        <h3>GET /api/v1/items/summary</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -122,19 +122,35 @@ table th, table td {
             </thead>
             <tbody>
               <tr>
-                <td>
-                    <span class="name">name</span>
+                <td class="required">
+                    <span class="name">happened_after</span>
                 </td>
                 <td>
-                  <span class="description">标签名称</span>
+                  <span class="description">起始日期</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="required">
+                    <span class="name">happened_before</span>
+                </td>
+                <td>
+                  <span class="description">终止日期</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="required">
+                    <span class="name">group_by</span>
+                </td>
+                <td>
+                  <span class="description">金额产生日期(&#39;happen_at&#39;,&#39;tags_id&#39;)</span>
                 </td>
               </tr>
               <tr>
                 <td>
-                    <span class="name">sign</span>
+                    <span class="name">kind</span>
                 </td>
                 <td>
-                  <span class="description">标签符号</span>
+                  <span class="description">类型: 1=&gt; expense, 0=&gt;income</span>
                 </td>
               </tr>
             </tbody>
@@ -151,42 +167,18 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">id</span>
+                    <span class="name">groups</span>
                 </td>
                 <td>
-                  <span class="description">id</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">user_id</span>
-                </td>
-                <td>
-                  <span class="description">所属用户id</span>
+                  <span class="description">分组信息</span>
                 </td>
               </tr>
               <tr>
                 <td>
-                    <span class="name">name</span>
+                    <span class="name">total</span>
                 </td>
                 <td>
-                  <span class="description">名称</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">sign</span>
-                </td>
-                <td>
-                  <span class="description">符号</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">delete_at</span>
-                </td>
-                <td>
-                  <span class="description">删除时间</span>
+                  <span class="description">总数(单位： 分)</span>
                 </td>
               </tr>
             </tbody>
@@ -196,18 +188,20 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Version: HTTP/1.0
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjM4NjEsImV4cCI6MTY3NTY3MzY3Nn0.Yog5i0dT2WtAdKBq1CGOp26iW1IrB9moCuICiumtm_A
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjM4NTUsImV4cCI6MTY3NTY3MzY3Nn0.5xLV9djXUnDeXM4x-8PE_3cYraKDOy6aILfRlZnWruo
 Accept: application/json
 Content-Type: application/json
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">PATCH /api/v1/tags/4692</pre>
+          <pre class="request route highlight">GET /api/v1/items/summary?happened_after=2018-01-01&amp;happened_before=2020-01-01&amp;group_by=happen_at</pre>
 
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">happened_after: 2018-01-01
+happened_before: 2020-01-01
+group_by: happen_at</pre>
 
-            <h4>Body</h4>
-            <pre class="request body">{"name":"x","sign":"y"}</pre>
 
 
             <h3>Response</h3>
@@ -220,22 +214,30 @@ X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
 Content-Type: application/json; charset=utf-8
 Vary: Accept
-ETag: W/&quot;a3f2b09f62c36b723bf86dcf1e7e5420&quot;
+ETag: W/&quot;58bbde78242a2dd2786b4d8c1f13c2cf&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: b931119a-7ea9-43d2-ad87-59fe3848546b
-X-Runtime: 0.007770
-Content-Length: 145</pre>
+X-Request-Id: a5ae1948-d600-44f7-86bb-b1b74385bf79
+X-Runtime: 0.005526
+Content-Length: 144</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
               <pre class="response body">{
-  &quot;sign&quot;: &quot;y&quot;,
-  &quot;name&quot;: &quot;x&quot;,
-  &quot;id&quot;: 4692,
-  &quot;user_id&quot;: 3861,
-  &quot;delete_at&quot;: null,
-  &quot;created_at&quot;: &quot;2023-02-06T06:54:36.469Z&quot;,
-  &quot;updated_at&quot;: &quot;2023-02-06T06:54:36.477Z&quot;
+  &quot;groups&quot;: [
+    {
+      &quot;happen_at&quot;: &quot;2018-06-18&quot;,
+      &quot;amount&quot;: 300
+    },
+    {
+      &quot;happen_at&quot;: &quot;2018-06-19&quot;,
+      &quot;amount&quot;: 300
+    },
+    {
+      &quot;happen_at&quot;: &quot;2018-06-20&quot;,
+      &quot;amount&quot;: 300
+    }
+  ],
+  &quot;total&quot;: 900
 }</pre>
       </div>
     </div>
