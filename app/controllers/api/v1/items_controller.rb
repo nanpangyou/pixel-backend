@@ -36,4 +36,41 @@ class Api::V1::ItemsController < ApplicationController
       render json: { msg: "没有此项" }, status: 404
     end
   end
+
+  def summary
+    return render status: 401, json: { error: "用户未登录" } if request.env["current_user_id"].nil?
+    selectItem = Item
+      .where(user_id: request.env["current_user_id"])
+      .where(created_at: params[:created_after]..params[:created_before])
+      .where(kind: params[:kind])
+    hash = Hash.new
+    if (params[:group_by] == "tags_id")
+      selectItem.each do |item|
+        item.tags_id.each do |tag_id|
+          key = tag_id
+          hash[key] = 0 if hash[key].nil?
+          hash[key] += item.amount
+        end
+      end
+    elsif (params[:group_by] == "happen_at")
+      selectItem.each do |item|
+        # 注意时区的问题
+        # key = item.happen_at.strftime("%Y-%m-%d")
+        key = item.happen_at.in_time_zone("Beijing").strftime("%F")
+        hash[key] = 0 if hash[key].nil?
+        hash[key] += item.amount
+      end
+    end
+    groups = hash
+      .map { |key, value| { "#{params[:group_by]}": key, amount: value } }
+    if (params["#{params[:group_by]}"] == "happen_at")
+      groups.sort! { |a, b| a[:happen_at] <=> b[:happen_at] }
+    elsif (params["#{params[:group_by]}"] == "tags_id")
+      groups.sort! { |a, b| a[:amount] <=> b[:amount] }
+    end
+    return render json: {
+                    groups: groups,
+                    total: selectItem.sum(:amount),
+                  }
+  end
 end

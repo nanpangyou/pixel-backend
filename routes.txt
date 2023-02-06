@@ -6,6 +6,7 @@
                           api_v1_session DELETE /api/v1/session(.:format)                                                                         api/v1/sessions#destroy
                                          POST   /api/v1/session(.:format)                                                                         api/v1/sessions#create
                                api_v1_me GET    /api/v1/me(.:format)                                                                              api/v1/mes#show
+                    summary_api_v1_items GET    /api/v1/items/summary(.:format)                                                                   api/v1/items#summary
                             api_v1_items GET    /api/v1/items(.:format)                                                                           api/v1/items#index
                                          POST   /api/v1/items(.:format)                                                                           api/v1/items#create
                              api_v1_item GET    /api/v1/items/:id(.:format)                                                                       api/v1/items#show
