@@ -85,7 +85,7 @@ if [ "$(docker ps -aq -f name=^${nginx_container_name}$)" ]; then
 fi
 
 title 'doc: docker run'
-docker run -d -p 8080:80 \
+docker run -d -p 9000:80 \
            --network=network1 \
            --name=$nginx_container_name \
            -v /home/$user/deploys/$version/api:/usr/share/nginx/html:ro \
