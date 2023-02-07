@@ -62,7 +62,7 @@ if [ "$(docker ps -aq -f name=^pixel-prod-1$)" ]; then
 fi
 
 title 'app: docker run'
-docker run -d -p 3000:3000 \
+docker run -d -p 9002:3000 \
            --network=network1 \
            --name=$container_name \
            -e DB_HOST=$DB_HOST \
